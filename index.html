@@ -14,6 +14,8 @@
             --accent: #38bdf8;
             --text: #f8fafc;
             --text-dim: #94a3b8;
+            --padding-desktop: 6rem 10%;
+            --padding-mobile: 4rem 6%;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,43 +26,78 @@
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
         /* NAVIGATION */
         nav {
             display: flex;
             justify-content: space-between;
-            padding: 1.5rem 5%;
+            align-items: center;
+            padding: 1rem 5%;
             position: fixed;
             width: 100%;
-            background: rgba(11, 15, 26, 0.8);
+            background: rgba(11, 15, 26, 0.85);
             backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             z-index: 1000;
             border-bottom: 1px solid #1e293b;
+            height: 70px;
         }
 
         nav .logo { font-weight: 700; letter-spacing: 2px; color: var(--accent); }
-        nav ul { display: flex; list-style: none; gap: 2rem; }
+        
+        nav ul { 
+            display: flex; 
+            list-style: none; 
+            gap: 2rem; 
+            align-items: center;
+        }
+        
         nav a { color: var(--text); text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
         nav a:hover { color: var(--accent); }
 
+        /* Mobile Menu Toggle button */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--text);
+            transition: 0.3s;
+        }
+
         /* HERO SECTION */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 0 10%;
+            padding: 0 6%;
             background: radial-gradient(circle at center, #1e293b 0%, #0b0f1a 100%);
         }
 
-        .hero h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); margin-bottom: 1rem; }
+        .hero h1 { 
+            font-size: clamp(2.2rem, 7vw, 4.5rem); 
+            margin-bottom: 1.5rem; 
+            line-height: 1.2;
+            margin-top: 60px;
+        }
         .highlight { color: var(--accent); text-shadow: 0 0 20px rgba(56, 189, 248, 0.3); }
 
-        /* PROCESS SECTION */
-        .section { padding: 6rem 10%; }
+        /* SECTIONS & GRIDS */
+        .section { padding: var(--padding-desktop); }
         .section-title { font-size: 2rem; margin-bottom: 3rem; text-align: center; }
 
         .process-grid {
@@ -71,7 +108,7 @@
 
         .process-step {
             background: var(--card-bg);
-            padding: 2rem;
+            padding: 2.5rem 2rem;
             border-radius: 15px;
             border: 1px solid #1e293b;
             text-align: center;
@@ -86,7 +123,7 @@
         }
 
         /* PROJECT CARDS */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
         
         .card {
             background: var(--card-bg);
@@ -95,23 +132,27 @@
             border: 1px solid #1e293b;
             transition: 0.4s;
             cursor: pointer;
+            height: 100%;
         }
 
-        .card:hover { transform: translateY(-10px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         
-        .project-img { width: 100%; height: 200px; object-fit: cover; }
+        .project-img { width: 100%; height: 220px; object-fit: cover; }
         .card-content { padding: 1.5rem; }
-        .tags { margin-top: 1rem; display: flex; gap: 0.5rem; }
-        .tags span { font-size: 0.7rem; background: #0ea5e920; color: var(--accent); padding: 0.3rem 0.7rem; border-radius: 4px; }
+        .card-content p { color: var(--text-dim); margin-top: 0.5rem; }
+        .tags { margin-top: 1.2rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .tags span { font-size: 0.75rem; background: #0ea5e920; color: var(--accent); padding: 0.3rem 0.7rem; border-radius: 4px; }
 
         /* CALL TO ACTION */
         .cta-box {
             background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
-            padding: 4rem;
+            padding: 4rem 2rem;
             border-radius: 20px;
             text-align: center;
-            margin-top: 4rem;
+            margin-top: 2rem;
         }
+
+        .cta-box h2 { font-size: clamp(1.8rem, 5vw, 2.5rem); margin-bottom: 1rem; }
 
         .btn {
             display: inline-block;
@@ -123,29 +164,66 @@
             border-radius: 8px;
             font-weight: 700;
             transition: 0.3s;
+            width: auto;
         }
 
-        .btn:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .btn:hover { transform: scale(1.03); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
 
-        footer { text-align: center; padding: 4rem 0; color: var(--text-dim); border-top: 1px solid #1e293b; }
+        footer { text-align: center; padding: 3rem 1rem; color: var(--text-dim); border-top: 1px solid #1e293b; font-size: 0.9rem;}
 
-        @media (max-width: 768px) { .section { padding: 4rem 5%; } }
+        /* MOBILE RESPONSIVE MEDIA QUERIES */
+        @media (max-width: 768px) {
+            .section { padding: var(--padding-mobile); }
+            
+            /* Hamburger Menu Styling */
+            .menu-toggle { display: flex; }
+            
+            nav ul {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: #0b0f1a;
+                flex-direction: column;
+                justify-content: center;
+                gap: 3rem;
+                transition: 0.4s ease-in-out;
+                border-top: 1px solid #1e293b;
+            }
+
+            nav ul.active { right: 0; }
+            nav ul a { font-size: 1.3rem; }
+
+            /* Hamburger animation when active */
+            .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+            .menu-toggle.active span:nth-child(2) { opacity: 0; }
+            .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+            .cta-box { padding: 3rem 1.5rem; }
+            .btn { width: 100%; max-width: 280px; text-align: center; }
+        }
     </style>
 </head>
 <body>
 
     <nav>
         <div class="logo">MG.STUDIO</div>
-        <ul>
-            <li><a href="#work">Work</a></li>
-            <li><a href="#process">Process</a></li>
-            <li><a href="#contact">Contact</a></li>
+        <button class="menu-toggle" aria-label="Toggle navigation" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul id="nav-menu">
+            <li><a href="#work" onclick="toggleMenu()">Work</a></li>
+            <li><a href="#process" onclick="toggleMenu()">Process</a></li>
+            <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
         </ul>
     </nav>
 
     <header class="hero">
         <h1>Coding the <span class="highlight">Future</span>,<br>Editing the <span class="highlight">Now</span>.</h1>
-        <p style="color: var(--text-dim); max-width: 600px;">Full-stack developer and cinematic video editor specialized in high-performance digital experiences.</p>
+        <p style="color: var(--text-dim); max-width: 600px; font-size: 1rem;">Full-stack developer and cinematic video editor specialized in high-performance digital experiences.</p>
         <a href="#work" class="btn" style="background: var(--accent); color: var(--bg);">Explore My Work</a>
     </header>
 
@@ -186,17 +264,17 @@
             <div class="process-step">
                 <span class="step-num">01</span>
                 <h3>Strategy</h3>
-                <p>We discuss your goals and plan the technical or creative direction.</p>
+                <p style="color: var(--text-dim); margin-top: 0.5rem;">We discuss your goals and plan the technical or creative direction.</p>
             </div>
             <div class="process-step">
                 <span class="step-num">02</span>
                 <h3>Execution</h3>
-                <p>I build the code or edit the footage using industry-standard tools.</p>
+                <p style="color: var(--text-dim); margin-top: 0.5rem;">I build the code or edit the footage using industry-standard tools.</p>
             </div>
             <div class="process-step">
                 <span class="step-num">03</span>
                 <h3>Delivery</h3>
-                <p>Polishing, revisions, and final deployment of your high-quality project.</p>
+                <p style="color: var(--text-dim); margin-top: 0.5rem;">Polishing, revisions, and final deployment of your high-quality project.</p>
             </div>
         </div>
     </section>
@@ -214,5 +292,16 @@
         <p>&copy; 2026 Manthan Ghogare | Kondhwa, Pune</p>
     </footer>
 
+    <script>
+        function toggleMenu() {
+            // Only trigger if mobile screen size
+            if (window.innerWidth <= 768) {
+                const menu = document.getElementById('nav-menu');
+                const toggleBtn = document.querySelector('.menu-toggle');
+                menu.classList.toggle('active');
+                toggleBtn.classList.toggle('active');
+            }
+        }
+    </script>
 </body>
 </html>
